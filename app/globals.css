@@ -24,3 +24,80 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@keyframes token-shine {
+  0% {
+    text-shadow: 0 0 0 rgba(218, 241, 222, 0.15), 0 0 0 rgba(142, 182, 155, 0.1);
+    filter: brightness(0.95);
+  }
+  50% {
+    text-shadow: 0 0 10px rgba(218, 241, 222, 0.75), 0 0 28px rgba(142, 182, 155, 0.55);
+    filter: brightness(1.14);
+  }
+  100% {
+    text-shadow: 0 0 0 rgba(218, 241, 222, 0.15), 0 0 0 rgba(142, 182, 155, 0.1);
+    filter: brightness(0.95);
+  }
+}
+
+.token-shine {
+  animation: token-shine 1.9s ease-in-out infinite;
+  will-change: filter, text-shadow;
+}
+
+@keyframes patient-highlight-sweep {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes patient-highlight-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.92;
+  }
+  50% {
+    transform: scale(1.03);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.92;
+  }
+}
+
+.patient-highlight-text {
+  background-image: linear-gradient(110deg, #8eb69b 0%, #daf1de 35%, #ffffff 50%, #daf1de 65%, #8eb69b 100%);
+  background-size: 220% 220%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation:
+    patient-highlight-sweep 2.2s linear infinite,
+    token-shine 1.6s ease-in-out infinite;
+  will-change: background-position, filter, text-shadow;
+}
+
+.patient-highlight-chip {
+  animation: patient-highlight-pulse 1.6s ease-in-out infinite;
+  box-shadow:
+    0 0 0 rgba(218, 241, 222, 0),
+    0 0 0 rgba(142, 182, 155, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .token-shine {
+    animation: none;
+  }
+
+  .patient-highlight-text,
+  .patient-highlight-chip {
+    animation: none;
+  }
+}
